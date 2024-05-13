@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дипломка</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="#">VELDORA</a>
+            </div>
+            <input type="checkbox" id="click">
+            <label for="click" class="mainicon">
+                <div class="menu">
+                    <i class="bi bi-list"></i>
+                </div>
+            </label>
+            <ul>
+                <li><a href="index.html" class="active">Главная</a></li>
+                <li><a href="Фотогалерея.html">Фотогалерея</a></li>
+                <li><a href="статьи.html">Статьи</a></li>
+                <li><a href="контакты.html">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Сетка карточек товаров -->
+<div class="cards"></div>
+
+<script>
+  // Данные о товарах
+  const products = [
+    { imageSrc: 'img/s2.jpg', altText: 'Леви акерман', discountPrice: '75 537', commonPrice: '83 930', link: 'https://en.wikipedia.org/wiki/Levi_Ackerman', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-levi' },
+    { imageSrc: 'img/s3.jpg', altText: 'Леви акерман', discountPrice: '81 837', commonPrice: '90 930', link: 'https://en.wikipedia.org/wiki/Levi_Ackerman', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-levi-the-final-season-ver' },
+    { imageSrc: 'img/s4.jpg', altText: 'Саша Браус', discountPrice: '81 000', commonPrice: '90 000', link: 'https://attackontitan.fandom.com/ru/wiki/Саша_Браус', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-sasha-blouse' },
+    { imageSrc: 'img/s5.jpg', altText: 'Эрен Йегер', discountPrice: '67 500', commonPrice: '75 000', link: 'https://attackontitan.fandom.com/ru/wiki/Эрен_Йегер', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-erenyeager' },
+    { imageSrc: 'img/s6.jpg', altText: 'Энни Леонхарт', discountPrice: '94 500', commonPrice: '105 000', link: 'https://attackontitan.fandom.com/ru/wiki/%D0%AD%D0%BD%D0%BD%D0%B8_%D0%9B%D0%B5%D0%BE%D0%BD%D1%85%D0%B0%D1%80%D1%82', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-annie-leonhart' },
+    { imageSrc: 'img/s9.jpg', altText: 'Тецуя Куроко', discountPrice: '48 930', commonPrice: '53 823', link: 'https://kurokonobasuke.fandom.com/ru/wiki/Тецуя_Куроко', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-kuroko-tetsuya' },
+    { imageSrc: 'img/s11.jpg', altText: 'Ацуши Мурасакибара', discountPrice: '100 737', commonPrice: '111 930', link: 'https://kurokonobasuke.fandom.com/ru/wiki/Ацуши_Мурасакибара', addToCartLink:'https://animestyle-shop.ru/products/anime-figure-nendoroid-atsushi-murasakibara' },
+    { imageSrc: 'img/s12.jpg', altText: 'Рёта Кисе', discountPrice: '138 537', commonPrice: '153 930', link: 'https://kurokonobasuke.fandom.com/ru/wiki/Рёта_Кисе',addToCartLink:'https://animestyle-shop.ru/products/anime-figure-nendoroid-kise-ryouta' },
+    { imageSrc: 'img/s13.jpg', altText: 'Чуя Накахара', discountPrice: '107 037', commonPrice: '118 930', link: 'https://bungostraydogs.fandom.com/ru/wiki/Чуя_Накахара',addToCartLink:'https://animestyle-shop.ru/products/anime-figure-nendoroid-chuuya-nakahara' },
+    { imageSrc: 'img/s14.jpg', altText: 'Осаму Дазай', discountPrice: '67 500', commonPrice: '75 000', link: 'https://bungostraydogs.fandom.com/ru/wiki/Осаму_Дазай',addToCartLink:'https://animestyle-shop.ru/products/anime-figure-nendoroid-osamu-dazai' },
+    { imageSrc: 'img/s15.jpg', altText: 'Рюноске Акутагава', discountPrice: '65 250', commonPrice: '72 500', link: 'https://bungostraydogs.fandom.com/ru/wiki/Рюноске_Акутагава', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-ryuunosuke-akutagawa' },
+    { imageSrc: 'img/s16.jpg', altText: 'Ацуши Накаджима', discountPrice: '75 537', commonPrice: '83 930', link: 'https://bungostraydogs.fandom.com/ru/wiki/Ацуши_Накаджима', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-atsushi-nakajima' },
+    { imageSrc: 'img/s18.jpg', altText: 'Сатору Годжо', discountPrice: '4 500', commonPrice: '5 000', link: 'https://jujutsu-kaisen.fandom.com/ru/wiki/Сатору_Годжо', addToCartLink: 'https://aliexpress.ru/item/1005006834116928.html?sku_id=12000038452336703&spm=.search_results.9.458055c3lcewww' },
+    { imageSrc: 'img/s19.jpg', altText: 'Юта Оккоцу', discountPrice: '38 784', commonPrice: '42 662', link: 'https://jujutsu-kaisen.fandom.com/ru/wiki/Юта_Оккоцу', addToCartLink: 'https://aliexpress.ru/item/1005004410413376.html?sku_id=12000029085395475&spm=a2g2w.productlist.search_results.11.4d8a4d8flUbMp0' },
+    { imageSrc: 'img/s20.jpg', altText: 'Юдзи Итадори', discountPrice: '68 613', commonPrice: '76 237', link: 'https://jujutsu-kaisen.fandom.com/ru/wiki/Юдзи_Итадори', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-yuuji-itadori' },
+    { imageSrc: 'img/s21.jpg', altText: 'Сукуна Рёмен', discountPrice: '8 788', commonPrice: '9 666', link: 'https://jujutsu-kaisen.fandom.com/ru/wiki/Сукуна_Рёмен', addToCartLink: 'https://ozon.kz/product/figurka-magicheskaya-bitva-remen-sukuna-dvulikiy-prizrak-jujutsu-kaisen-sukuna-1834-10sm-1191277614/?asb=aJVOcsd8k7yR0yvAu9Ge2bui16G7hSGhPPBNU%252FkTsDk%253D&asb2=9l8B6YUtJhqBTIcWvAHsB-WcE6cMb9Eky_MSBdW7ZOcy4FzeZ1JYXsmA9oyn9yCu&avtc=1&avte=4&avts=1713937323&keywords=сукуна+фигурка' },
+    { imageSrc: 'img/s22.jpg', altText: 'Хайсэ Сасаки', discountPrice: '69 237', commonPrice: '76 930', link: 'https://roghoul-rblx.fandom.com/wiki/Haise_Sasaki', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-sasaki-haise' },
+    { imageSrc: 'img/s23.jpg', altText: 'Тогэ Инумаки', discountPrice: '62 313', commonPrice: '69 237', link: 'https://jujutsu-kaisen.fandom.com/ru/wiki/Тогэ_Инумаки ', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-toge-inumaki' },
+    { imageSrc: 'img/s24.jpg', altText: 'Тоширо Хитсугая', discountPrice: '88 137', commonPrice: '97 930', link: 'https://bleachover.fandom.com/wiki/Tōshirō_Hitsugaya', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-toushirou-hitsugaya-good-smile-company' },
+    { imageSrc: 'img/s25.jpg', altText: 'Ичиго Куросаки', discountPrice: '94 437', commonPrice: '104 930', link: 'https://bleachakujin.fandom.com/wiki/Ichigo_Kurosaki', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-ichigo-kurosaki-good-smile-company' },
+    { imageSrc: 'img/s26.jpg', altText: 'Шинске Кита', discountPrice: '32 537', commonPrice: '35 790', link: 'https://haikyuu.fandom.com/ru/wiki/Шинске_Кита', addToCartLink: 'https://aliexpress.ru/item/1005004135431383.html?sku_id=12000028150210336&spm=a2g2w.productlist.search_results.0.6aa373c1R8gSJl' },
+    { imageSrc: 'img/s27.jpg', altText: 'Атсуму Мия', discountPrice: '88 137', commonPrice: '96 950', link: 'https://haikyuu.fandom.com/ru/wiki/Атсуму_Мия', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-atsumu-miya' },
+    { imageSrc: 'img/s28.jpg', altText: 'Шоё Хината', discountPrice: '62 937', commonPrice: '69 930', link: 'https://haikyuu.fandom.com/ru/wiki/Шоё_Хината', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-hinata-shouyou' },
+    { imageSrc: 'img/s29.jpg', altText: 'Кей Цукишима', discountPrice: '69 237', commonPrice: '76 930', link: 'https://haikyuu.fandom.com/ru/wiki/Кей_Цукишима', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-kei-tsukishima' },
+    { imageSrc: 'img/s30.jpg', altText: 'Котаро Бокуто', discountPrice: '69 237', commonPrice: '76 930', link: 'https://haikyuu.fandom.com/ru/wiki/Котаро_Бокуто', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-kotaro-bokuto-good-smile-company' },
+    { imageSrc: 'img/s31.jpg', altText: 'Юу Нишиноя', discountPrice: '62 937', commonPrice: '69 930', link: 'https://haikyuu.fandom.com/ru/wiki/Юу_Нишиноя', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-yuu-nishinoya' },
+    { imageSrc: 'img/s32.jpg', altText: 'Асахи Азумане', discountPrice: '63 000', commonPrice: '70 000', link: 'https://haikyuu.fandom.com/ru/wiki/Асахи_Азумане', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-asahi-azumane' },
+    { imageSrc: 'img/s33.jpg', altText: 'Коши Сугавара', discountPrice: '60 997', commonPrice: '67 775', link: 'https://haikyuu.fandom.com/ru/wiki/Коши_Сугавара', addToCartLink: 'https://animestyle-shop.ru/products/anime-figure-nendoroid-sugawara-koushi' },
+  ];
+
+// Контейнер для карточек товаров
+const cardsContainer = document.querySelector('.cards');
+
+// Создание карточек товаров
+products.forEach(product => {
+  const card = `
+    <div class="card">
+      <div class="card__top">
+        <a href="#" class="card__image">
+          <img src="${product.imageSrc}" alt="${product.altText}">
+        </a>
+        <div class="card__label">-10%</div>
+      </div>
+      <div class="card__bottom">
+        <div class="card__prices">
+          <div class="card__price card__price--discount">${product.discountPrice}</div>
+          <div class="card__price card__price--common">${product.commonPrice}</div>
+        </div>
+        <a href="${product.link}" class="card__title">${product.altText}</a>
+        <a href="${product.addToCartLink}" class="card__add">В корзину</a>
+      </div>
+    </div>
+  `;
+
+  cardsContainer.innerHTML += card;
+});
+</script>
+
+<footer class="footer">
+        <div class="container">
+            <div class="row">
+ 
+                <div class="footer-col">
+                    <h4>О нас</h4>
+                    <ul>
+                        <li><a href="контакты.html">Контакты</a></li>
+                    </ul>
+                </div>
+             
+                <div class="footer-col">
+                    <h4>VELDORA</h4>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="Фотогалерея.html">Фотогалерея</a></li>
+                        <li><a href="статьи.html">Статьи</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Наши сотсети</h4>
+                    <ul>
+                        <li><a href="https://t.me/narmetov_sh">Telegram</a></li>
+                        <li><a href="https://www.instagram.com/narmetov_sh_?igsh=MXQ3MTQ2cnBoZDhzbA%3D%3D&utm_source=qr">Instagram</a></li>
+                        <li><a href="https://www.facebook.com/profile.php?id=100062989900560">facebook</a></li>
+                        <li><a href="https://www.tiktok.com/@dazay365?_t=8ljbePpJT6b">tiktok</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Подпишитесь на нас</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=100062989900560"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/SahzodN93457"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/narmetov_sh_?igsh=MXQ3MTQ2cnBoZDhzbA%3D%3D&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@ShahNarmetov?si=bZ_blqPpcLbcD6DR"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </footer>
+</body>
+</html>
